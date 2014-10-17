@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Jiajun Fan" />
 
-    <title>Jiajun's Blog</title>
+    <title>Categories - Jiajun's Blog</title>
 
     <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
     <link rel="stylesheet" href="/theme/css/style.css" >
@@ -48,34 +48,24 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <article>
-                <h2><a href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html">使用 Pelican+Nginx 搭建静态 Blog</a></h2>
-                <div class="summary"><p>对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用<a href="http://octoptress.org">Octopress</a>或者<a href="http://jekyllrb.com">Jekyll</a>，喜欢Python的可以用<a href="http://blog.getpelican.com/">Pelican</a>，node.js下有<a href="http://hexo.io">Hexo</a>，<a href="http://metalsmith.io">MetalSmith</a>等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。</p>
-<h1>安装Pelican</h1>
-<p>Pelican是一个基于Python的静态网站生成工具，可以简单地使用<code>pip</code>来安装。如果尚未安装Python或者pip，请自行google，安装Pelican时请视需要加上<code>sudo</code>。</p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span> <span class="n">markdown</span>
-</pre></div>
-
-
-<h1>建立静态Blog</h1>
-<p>首先创建一个目录储存你的Blog</p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">projects</span><span class="o">/</span><span class="n">yoursite</span>
-<span class="n">cd</span> <span class="o">~/</span><span class="n">projects</span><span class="o">/</span><span class="n">yoursite</span>
-</pre></div>
-
-
-<p>进入目录之后创建一个新的Pelican工程</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
-</pre></div>
-
-
-<p>Pelican会询问一系列配置问题，请按需回答。 <br />
-此时在<code>yoursite</code>目录下新建了一个名为<code>content</code>的目录，该目录用于存放你的博客文章 ...</p>
-                    <a class="btn btn-default btn-xs" href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html">more ...</a>
+    <section id="categories">
+        <h1>All Categories for Jiajun's Blog</h1>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-ji-zhu">技术 <span class="badge pull-right">1</span></a>
+                    </h4>
                 </div>
-            </article>
-            <hr/>
+                <div id="collapse-ji-zhu" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><span class="categories-timestamp"><time datetime="2014-10-15T21:20:00">Wed 15 October 2014</time></span> <a href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html">使用 Pelican+Nginx 搭建静态 Blog</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </section>
         </div>
     </div>
 </div>

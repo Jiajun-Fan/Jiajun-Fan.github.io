@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jiajun's Blog</title><link>/</link><description></description><atom:link href="/feeds/jiajun-fan.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 15 Oct 2014 21:20:00 +0200</lastBuildDate><item><title>使用 Pelican+Nginx 搭建静态 Blog</title><link>/shi-yong-pelicannginx-da-jian-jing-tai-blog.html</link><description>&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
+&lt;h1&gt;安装Pelican&lt;/h1&gt;
+&lt;p&gt;Pelican是一个基于Python的静态网站生成工具，可以简单地使用&lt;code&gt;pip&lt;/code&gt;来安装。如果尚未安装Python或者pip，请自行google，安装Pelican时请视需要加上&lt;code&gt;sudo&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;建立静态Blog&lt;/h1&gt;
+&lt;p&gt;首先创建一个目录储存你的Blog&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yoursite&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yoursite&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;进入目录之后创建一个新的Pelican工程&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pelican会询问一系列配置问题，请按需回答。 &lt;br /&gt;
+此时在&lt;code&gt;yoursite&lt;/code&gt;目录下新建了一个名为&lt;code&gt;content&lt;/code&gt;的目录，该目录用于存放你的博客文章。Pelican支持富文本，Markdown和AsciiDoc等多种格式，这里以Markdown为例。你是否注意到我们在第一步时，除了Pelican之外还安装&lt;code&gt;markdown&lt;/code&gt;，请不要漏掉它，否则Pelican将无法识别出&lt;code&gt;content&lt;/code&gt;目录下的Markdown文件。   &lt;br /&gt;
+输入以下文字并将其保存为&lt;code&gt;first.md&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;Blog&lt;/span&gt;
+&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2014&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Blog&lt;/span&gt;
+
+&lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt; &lt;span class="n"&gt;fist&lt;/span&gt; &lt;span class="n"&gt;Blog&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Awesome&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;接下去就可以生成静态Blog了，以下两种方式均可，你会注意到命令完成之后，一个完整的静态Blog就生成在&lt;code&gt;output&lt;/code&gt;目录下了。 &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pelican&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;
+
+&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pelican的配置信息大多存放于&lt;code&gt;pelicanconf.py&lt;/code&gt;和&lt;code&gt;publishconf.py&lt;/code&gt;两个文件中，请参考&lt;a href="http://docs.getpelican.com/en/3.4.0/"&gt;Pelican 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;Pelican的默认主题并不是特别美观，我们也可以自行创建主题或者使用网上开源的主题，例如&lt;a href="https://github.com/DandyDev/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mkdir&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="n"&gt;theme&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;theme&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//github.com/DandyDev/pelican-bootstrap3.git&lt;/span&gt;
+&lt;span class="n"&gt;pelican&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bootstrap3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果你不想每次生成Blog的时候手动指定主题，也可以将主题加入配置文件&lt;code&gt;pelicanconf.py&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;theme/pelican-bootstrap3&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;部署到Nginx&lt;/h1&gt;
+&lt;p&gt;至此，我们已经有了静态Blog的所需的所有文件，但为了能在互联网上访问，我们还需要将其部署到Web服务器上。现在许多网站均支持静态站点托管，例如&lt;a href="https://www.dropbox.com"&gt;Dropbox&lt;/a&gt;，&lt;a href="https://drive.google.com"&gt;Google Drive&lt;/a&gt;，&lt;a href="https://github.com/"&gt;Github&lt;/a&gt;等。国内的有&lt;a href="http://www.aliyun.com"&gt;Aliyun OSS&lt;/a&gt;，&lt;a href="http://gitcafe.com"&gt;GitCafe&lt;/a&gt;等。如果想自行搭建Web服务器，可以使用Nginx。  &lt;br /&gt;
+Nginx可以通过&lt;code&gt;apt-get&lt;/code&gt;来安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;顺利安装完Nginx之后，我们需要修改其配置文件&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;，首先留好备份。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nginx&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bak&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在&lt;code&gt;/etc/nginx/nginx.conf&lt;/code&gt;中加入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;http&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yoursite&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这是一个简单的例子，静态Blog将被部署到&lt;code&gt;www.example.com&lt;/code&gt;，其中&lt;code&gt;server_name&lt;/code&gt;是站点的域名，如果没有域名可以使用IP地址代替，&lt;code&gt;location&lt;/code&gt;的&lt;code&gt;root&lt;/code&gt;参数指向静态Blog在服务器中的位置。 &lt;br /&gt;
+重启Nginx，就可以访问你的Blog了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt; &lt;span class="n"&gt;restart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;至此，一个简单的静态Blog就搭建完毕了，其它工具或者平台略有差异，但基本思路是一致的。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jiajun Fan</dc:creator><pubDate>Wed, 15 Oct 2014 21:20:00 +0200</pubDate><guid>tag:,2014-10-15:shi-yong-pelicannginx-da-jian-jing-tai-blog.html</guid></item></channel></rss>
