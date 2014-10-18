@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="cn"
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+        <meta name="author" content="Jiajun Fan" />
+        <meta name="description" content="RaspberryPi是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。 准备工作 RaspberryPi 一块：淘宝上就有售，价格大约200多 SD卡 一张：容量不小于2G `移动硬盘｀ 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。 网络连接：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。 Setup RaspberryPi 首先我们需要下载操作系统的镜像，地址在这里。RaspberryPi支持多个Linux发行版 ..." />
+
+    <title>使用 RaspberryPi 搭建 BT 盒子 - Jiajun's Blog</title>
+
+    <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/theme/css/style.css" >
+    <link rel="stylesheet" href="/theme/css/font-awesome.min.css" >
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/theme/js/html5shiv.js"></script>
+      <script src="/theme/js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/theme/js/modernizr.js"></script>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"> Jiajun's Blog </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/category/ji-zhu.html">技术</a></li>
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label"> Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/shi-yong-raspberrypi-da-jian-bt-he-zi.html"
+                       rel="bookmark"
+                       title="Permalink to 使用 RaspberryPi 搭建 BT 盒子">
+                        使用 RaspberryPi 搭建 BT 盒子
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+     <time datetime="2014-10-18T11:00:00"> Sat 18 October 2014</time>
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><a href="https://en.wikipedia.org/wiki/Raspberrypi">RaspberryPi</a>是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。</p>
+<h1>准备工作</h1>
+<ul>
+<li><code>RaspberryPi</code> 一块：淘宝上就有售，价格大约200多</li>
+<li><code>SD卡</code> 一张：容量不小于2G</li>
+<li>`移动硬盘｀ 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。</li>
+<li><code>网络连接</code>：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。</li>
+</ul>
+<h1>Setup RaspberryPi</h1>
+<p>首先我们需要下载操作系统的镜像，<a href="http://www.raspberrypi.org/downloads/">地址在这里</a>。RaspberryPi支持多个Linux发行版，甚至还支持其它非Linux的操作系统，这里我们使用<code>RASPBIAN</code>，这是一个基于<code>debian</code>的版本，如果你熟悉<code>debian</code>或者<code>Ubuntu</code>的话，会发现它非常容易上手。</p>
+<p>接下来我们需要将下载好的镜像烧入到SD卡中，这里以Mac OS为例，如果你使用Windows或者Linux，可以在<a href="http://www.raspberrypi.org/documentation/installation/installing-images/">这里</a>找到安装方法。    </p>
+<ul>
+<li>
+<p>插入SD卡到你的电脑，并找出其挂载位置。  <br />
+    diskutil list</p>
+</li>
+<li>
+<p>从容量和名称上可以大致判断出那个是SD卡，我们假设现在是<code>/dev/disk1</code>，下一步就是把它Unmount下来。 <br />
+    diskutil unmountDisk /dev/disk1</p>
+</li>
+<li>
+<p>将镜像烧入到SD中，这会花上一点时间，请耐心等待。  <br />
+    sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1</p>
+</li>
+<li>
+<p>将SD取下并插入到RaspberryPi中，加电启动。  </p>
+</li>
+<li>
+<p>将RaspberryPi连接到你的路由器，如果你使用有线连接，直接插网线就行，如果使用WIFI，需要手动配置WIFI连接，请自己Google。然后你可以在路由器的管理界面中找到RaspberryPi的IP地址。</p>
+</li>
+<li>
+<p>现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是<code>pi</code>，密码是<code>raspberry</code>。 <br />
+    ssh 192.168.1.201 </p>
+</li>
+</ul>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<footer id="footerwrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <p>
+                <h4>关于作者</h4>
+                <div class="hline-w"></div>
+                <p>一花一世界，一叶一菩提，欢迎<a href="mailto:celeheaven@gmail.com">与我联系</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Social Links</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="http://weibo.com/celeheaven"><i class="fa fa-weibo"></i></a>
+                    <a href="https://github.com/Jiajun-Fan"><i class="fa fa-github"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="https://twitter.com/celeheaven"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>声明</h4>
+                <div class="hline-w"></div>
+                <p>
+                本站所有文章欢迎转载，转载时请附上原文链接<br/>
+                如果本站的内容侵犯了您的合法权益，请联系我们，我们会尽快修改或删除<br/>
+                </p>
+            <div>
+        </div>
+    </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
+
+</body>
+</html>
