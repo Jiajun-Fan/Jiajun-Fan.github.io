@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
         <meta name="author" content="Jiajun Fan" />
-        <meta name="description" content="RaspberryPi是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。 准备工作 RaspberryPi 一块：淘宝上就有售，价格大约200多 SD卡 一张：容量不小于2G `移动硬盘｀ 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。 网络连接：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。 Setup RaspberryPi 首先我们需要下载操作系统的镜像，地址在这里。RaspberryPi支持多个Linux发行版 ..." />
+        <meta name="description" content="RaspberryPi是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。 准备工作 RaspberryPi 一块：淘宝上就有售，价格大约200多 SD卡 一张：容量不小于2G 移动硬盘 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。 网络连接：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。 Setup RaspberryPi 首先我们需要下载操作系统的镜像，地址在这里。RaspberryPi支持多个Linux发行版 ..." />
 
     <title>使用 RaspberryPi 搭建 BT 盒子 - Jiajun's Blog</title>
 
@@ -76,7 +76,7 @@
 <ul>
 <li><code>RaspberryPi</code> 一块：淘宝上就有售，价格大约200多</li>
 <li><code>SD卡</code> 一张：容量不小于2G</li>
-<li>`移动硬盘｀ 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。</li>
+<li><code>移动硬盘</code> 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。</li>
 <li><code>网络连接</code>：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。</li>
 </ul>
 <h1>Setup RaspberryPi</h1>
@@ -85,15 +85,15 @@
 <ul>
 <li>
 <p>插入SD卡到你的电脑，并找出其挂载位置。  <br />
-    diskutil list</p>
+      diskutil list</p>
 </li>
 <li>
 <p>从容量和名称上可以大致判断出那个是SD卡，我们假设现在是<code>/dev/disk1</code>，下一步就是把它Unmount下来。 <br />
-    diskutil unmountDisk /dev/disk1</p>
+      diskutil unmountDisk /dev/disk1</p>
 </li>
 <li>
 <p>将镜像烧入到SD中，这会花上一点时间，请耐心等待。  <br />
-    sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1</p>
+      sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1</p>
 </li>
 <li>
 <p>将SD取下并插入到RaspberryPi中，加电启动。  </p>
@@ -103,7 +103,7 @@
 </li>
 <li>
 <p>现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是<code>pi</code>，密码是<code>raspberry</code>。 <br />
-    ssh 192.168.1.201 </p>
+      ssh 192.168.1.201 </p>
 </li>
 </ul>
             </div>

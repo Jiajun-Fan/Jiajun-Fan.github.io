@@ -4,7 +4,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;RaspberryPi&lt;/code&gt; 一块：淘宝上就有售，价格大约200多&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;SD卡&lt;/code&gt; 一张：容量不小于2G&lt;/li&gt;
-&lt;li&gt;`移动硬盘｀ 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;移动硬盘&lt;/code&gt; 一个：RaspberrPi提供了2个USB接口，但由于其供电能力较弱，无法直接驱动2.5寸移动硬盘。如果想使用2.5寸移动硬盘，需使用额外的有源USB Hub。推荐使用3.5寸移动硬盘，由于其本身自带电源输入，3.5寸价格便宜量又足，可以直接使用。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;网络连接&lt;/code&gt;：如果使用无线需要一个USB WIFI，如果使用有线的话，有根网线就行了。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1&gt;Setup RaspberryPi&lt;/h1&gt;
@@ -13,15 +13,15 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;插入SD卡到你的电脑，并找出其挂载位置。  &lt;br /&gt;
-    diskutil list&lt;/p&gt;
+      diskutil list&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;从容量和名称上可以大致判断出那个是SD卡，我们假设现在是&lt;code&gt;/dev/disk1&lt;/code&gt;，下一步就是把它Unmount下来。 &lt;br /&gt;
-    diskutil unmountDisk /dev/disk1&lt;/p&gt;
+      diskutil unmountDisk /dev/disk1&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;将镜像烧入到SD中，这会花上一点时间，请耐心等待。  &lt;br /&gt;
-    sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1&lt;/p&gt;
+      sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;将SD取下并插入到RaspberryPi中，加电启动。  &lt;/p&gt;
@@ -31,7 +31,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是&lt;code&gt;pi&lt;/code&gt;，密码是&lt;code&gt;raspberry&lt;/code&gt;。 &lt;br /&gt;
-    ssh 192.168.1.201 &lt;/p&gt;
+      ssh 192.168.1.201 &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</summary></entry><entry><title>使用 Pelican+Nginx 搭建静态 Blog</title><link href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html" rel="alternate"></link><updated>2014-10-15T21:20:00+02:00</updated><author><name>Jiajun Fan</name></author><id>tag:,2014-10-15:shi-yong-pelicannginx-da-jian-jing-tai-blog.html</id><summary type="html">&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
 &lt;h1&gt;安装Pelican&lt;/h1&gt;
