@@ -10,30 +10,36 @@
 &lt;h1&gt;Setup RaspberryPi&lt;/h1&gt;
 &lt;p&gt;首先我们需要下载操作系统的镜像，&lt;a href="http://www.raspberrypi.org/downloads/"&gt;地址在这里&lt;/a&gt;。RaspberryPi支持多个Linux发行版，甚至还支持其它非Linux的操作系统，这里我们使用&lt;code&gt;RASPBIAN&lt;/code&gt;，这是一个基于&lt;code&gt;debian&lt;/code&gt;的版本，如果你熟悉&lt;code&gt;debian&lt;/code&gt;或者&lt;code&gt;Ubuntu&lt;/code&gt;的话，会发现它非常容易上手。&lt;/p&gt;
 &lt;p&gt;接下来我们需要将下载好的镜像烧入到SD卡中，这里以Mac OS为例，如果你使用Windows或者Linux，可以在&lt;a href="http://www.raspberrypi.org/documentation/installation/installing-images/"&gt;这里&lt;/a&gt;找到安装方法。    &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;插入SD卡到你的电脑，并找出其挂载位置。  &lt;br /&gt;
-      diskutil list&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;从容量和名称上可以大致判断出那个是SD卡，我们假设现在是&lt;code&gt;/dev/disk1&lt;/code&gt;，下一步就是把它Unmount下来。 &lt;br /&gt;
-      diskutil unmountDisk /dev/disk1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;将镜像烧入到SD中，这会花上一点时间，请耐心等待。  &lt;br /&gt;
-      sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;p&gt;插入SD卡到你的电脑，并找出其挂载位置。    &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;diskutil&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;从容量和名称上可以大致判断出那个是SD卡，我们假设现在是&lt;code&gt;/dev/disk1&lt;/code&gt;，下一步就是把它Unmount下来。   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;diskutil&lt;/span&gt; &lt;span class="n"&gt;unmountDisk&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;disk1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将镜像烧入到SD中，这会花上一点时间，请耐心等待。    &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dd&lt;/span&gt; &lt;span class="n"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;wheezy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;raspbian&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;disk1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;将SD取下并插入到RaspberryPi中，加电启动。  &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;将RaspberryPi连接到你的路由器，如果你使用有线连接，直接插网线就行，如果使用WIFI，需要手动配置WIFI连接，请自己Google。然后你可以在路由器的管理界面中找到RaspberryPi的IP地址。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是&lt;code&gt;pi&lt;/code&gt;，密码是&lt;code&gt;raspberry&lt;/code&gt;。 &lt;br /&gt;
-      ssh 192.168.1.201 &lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>使用 Pelican+Nginx 搭建静态 Blog</title><link href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html" rel="alternate"></link><updated>2014-10-15T21:20:00+02:00</updated><author><name>Jiajun Fan</name></author><id>tag:,2014-10-15:shi-yong-pelicannginx-da-jian-jing-tai-blog.html</id><summary type="html">&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
+&lt;p&gt;现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是&lt;code&gt;pi&lt;/code&gt;，密码是&lt;code&gt;raspberry&lt;/code&gt;。   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="mf"&gt;192.168.1.201&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一切顺利的话，便可以成功登录到RaspberryPi了。&lt;/p&gt;
+&lt;h1&gt;挂载移动硬盘&lt;/h1&gt;
+&lt;p&gt;现在很多移动硬盘都采用NTFS格式，NTFS可以在Windows下使用，同时可以支持2G以上的大文件，但RASPBIAN默认不支持NTFS，为此我们需要安装ntfs-3g插件。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ntfs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;安装完成之后，将移动硬盘连接到RaspberryPi。&lt;/p&gt;</summary></entry><entry><title>使用 Pelican+Nginx 搭建静态 Blog</title><link href="/shi-yong-pelicannginx-da-jian-jing-tai-blog.html" rel="alternate"></link><updated>2014-10-15T21:20:00+02:00</updated><author><name>Jiajun Fan</name></author><id>tag:,2014-10-15:shi-yong-pelicannginx-da-jian-jing-tai-blog.html</id><summary type="html">&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
 &lt;h1&gt;安装Pelican&lt;/h1&gt;
 &lt;p&gt;Pelican是一个基于Python的静态网站生成工具，可以简单地使用&lt;code&gt;pip&lt;/code&gt;来安装。如果尚未安装Python或者pip，请自行google，安装Pelican时请视需要加上&lt;code&gt;sudo&lt;/code&gt;。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;

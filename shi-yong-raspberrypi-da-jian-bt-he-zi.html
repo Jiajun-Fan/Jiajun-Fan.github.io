@@ -82,30 +82,36 @@
 <h1>Setup RaspberryPi</h1>
 <p>首先我们需要下载操作系统的镜像，<a href="http://www.raspberrypi.org/downloads/">地址在这里</a>。RaspberryPi支持多个Linux发行版，甚至还支持其它非Linux的操作系统，这里我们使用<code>RASPBIAN</code>，这是一个基于<code>debian</code>的版本，如果你熟悉<code>debian</code>或者<code>Ubuntu</code>的话，会发现它非常容易上手。</p>
 <p>接下来我们需要将下载好的镜像烧入到SD卡中，这里以Mac OS为例，如果你使用Windows或者Linux，可以在<a href="http://www.raspberrypi.org/documentation/installation/installing-images/">这里</a>找到安装方法。    </p>
-<ul>
-<li>
-<p>插入SD卡到你的电脑，并找出其挂载位置。  <br />
-      diskutil list</p>
-</li>
-<li>
-<p>从容量和名称上可以大致判断出那个是SD卡，我们假设现在是<code>/dev/disk1</code>，下一步就是把它Unmount下来。 <br />
-      diskutil unmountDisk /dev/disk1</p>
-</li>
-<li>
-<p>将镜像烧入到SD中，这会花上一点时间，请耐心等待。  <br />
-      sudo dd bs=1m if=20XX-XX-XX-wheezy-raspbian.img of=/dev/disk1</p>
-</li>
-<li>
+<p>插入SD卡到你的电脑，并找出其挂载位置。    </p>
+<div class="highlight"><pre><span class="n">diskutil</span> <span class="n">list</span>
+</pre></div>
+
+
+<p>从容量和名称上可以大致判断出那个是SD卡，我们假设现在是<code>/dev/disk1</code>，下一步就是把它Unmount下来。   </p>
+<div class="highlight"><pre><span class="n">diskutil</span> <span class="n">unmountDisk</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk1</span>
+</pre></div>
+
+
+<p>将镜像烧入到SD中，这会花上一点时间，请耐心等待。    </p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">dd</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">m</span> <span class="k">if</span><span class="o">=</span><span class="mi">20</span><span class="n">XX</span><span class="o">-</span><span class="n">XX</span><span class="o">-</span><span class="n">XX</span><span class="o">-</span><span class="n">wheezy</span><span class="o">-</span><span class="n">raspbian</span><span class="p">.</span><span class="n">img</span> <span class="n">of</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk1</span>
+</pre></div>
+
+
 <p>将SD取下并插入到RaspberryPi中，加电启动。  </p>
-</li>
-<li>
 <p>将RaspberryPi连接到你的路由器，如果你使用有线连接，直接插网线就行，如果使用WIFI，需要手动配置WIFI连接，请自己Google。然后你可以在路由器的管理界面中找到RaspberryPi的IP地址。</p>
-</li>
-<li>
-<p>现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是<code>pi</code>，密码是<code>raspberry</code>。 <br />
-      ssh 192.168.1.201 </p>
-</li>
-</ul>
+<p>现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是<code>pi</code>，密码是<code>raspberry</code>。   </p>
+<div class="highlight"><pre><span class="n">ssh</span> <span class="mf">192.168.1.201</span>
+</pre></div>
+
+
+<p>一切顺利的话，便可以成功登录到RaspberryPi了。</p>
+<h1>挂载移动硬盘</h1>
+<p>现在很多移动硬盘都采用NTFS格式，NTFS可以在Windows下使用，同时可以支持2G以上的大文件，但RASPBIAN默认不支持NTFS，为此我们需要安装ntfs-3g插件。</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">ntfs</span><span class="o">-</span><span class="mi">3</span><span class="n">g</span>
+</pre></div>
+
+
+<p>安装完成之后，将移动硬盘连接到RaspberryPi。</p>
             </div>
             <!-- /.entry-content -->
         </article>
