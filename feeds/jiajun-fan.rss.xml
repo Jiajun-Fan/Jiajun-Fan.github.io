@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jiajun's Blog</title><link>/</link><description></description><atom:link href="/feeds/jiajun-fan.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 18 Oct 2014 11:00:00 +0200</lastBuildDate><item><title>使用 RaspberryPi 搭建 BT 盒子</title><link>/shi-yong-raspberrypi-da-jian-bt-he-zi.html</link><description>&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Raspberrypi"&gt;RaspberryPi&lt;/a&gt;是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>一朵云</title><link>/</link><description></description><atom:link href="/feeds/jiajun-fan.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 18 Oct 2014 11:00:00 +0200</lastBuildDate><item><title>使用 RaspberryPi 搭建 BT 盒子</title><link>/shi-yong-raspberrypi-da-jian-bt-he-zi.html</link><description>&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Raspberrypi"&gt;RaspberryPi&lt;/a&gt;是一个低成本的ARM Linux系统，售价仅有35美金，但依然提供了非常好的可靠性，我的RaspberryPi 7*24 运行了两年多，没有出过一点问题。此外RaspberryPi的功耗非常低，因此非常适合作为一个一直在线的Headless Home Server使用。本文仅以BT下载为例，事实上RaspberryPi可以完成的事情远比这多得多。&lt;/p&gt;
 &lt;h1&gt;准备工作&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;RaspberryPi&lt;/code&gt; 一块：淘宝上就有售，价格大约200多&lt;/li&gt;
@@ -20,26 +20,65 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;将镜像烧入到SD中，这会花上一点时间，请耐心等待。    &lt;/p&gt;
+&lt;p&gt;将镜像烧入到SD中，这会花上一点时间，请耐心等待。&lt;code&gt;if&lt;/code&gt;参数指定下载好的镜像文件，&lt;code&gt;of&lt;/code&gt;即SD卡。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dd&lt;/span&gt; &lt;span class="n"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;XX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;wheezy&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;raspbian&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;disk1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;将SD取下并插入到RaspberryPi中，加电启动。  &lt;/p&gt;
 &lt;p&gt;将RaspberryPi连接到你的路由器，如果你使用有线连接，直接插网线就行，如果使用WIFI，需要手动配置WIFI连接，请自己Google。然后你可以在路由器的管理界面中找到RaspberryPi的IP地址。&lt;/p&gt;
-&lt;p&gt;现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.201。RASPBIAN镜像的默认用户名是&lt;code&gt;pi&lt;/code&gt;，密码是&lt;code&gt;raspberry&lt;/code&gt;。   &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="mf"&gt;192.168.1.201&lt;/span&gt;
+&lt;p&gt;现在我们可以通过ssh连接到RaspberryPi了，这里我们假设RaspberryPi的IP地址为192.168.1.205。RASPBIAN镜像的默认用户名是&lt;code&gt;pi&lt;/code&gt;，密码是&lt;code&gt;raspberry&lt;/code&gt;。   &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="mf"&gt;192.168.1.205&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;一切顺利的话，便可以成功登录到RaspberryPi了。&lt;/p&gt;
+&lt;p&gt;一切顺利的话，便可以成功登录到RaspberryPi了。&lt;br /&gt;
+&lt;img alt="登录界面" src="theme/img/img01.png" /&gt;&lt;/p&gt;
 &lt;h1&gt;挂载移动硬盘&lt;/h1&gt;
 &lt;p&gt;现在很多移动硬盘都采用NTFS格式，NTFS可以在Windows下使用，同时可以支持2G以上的大文件，但RASPBIAN默认不支持NTFS，为此我们需要安装ntfs-3g插件。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ntfs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ntfs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;安装完成之后，将移动硬盘连接到RaspberryPi。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jiajun Fan</dc:creator><pubDate>Sat, 18 Oct 2014 11:00:00 +0200</pubDate><guid>tag:,2014-10-18:shi-yong-raspberrypi-da-jian-bt-he-zi.html</guid></item><item><title>使用 Pelican+Nginx 搭建静态 Blog</title><link>/shi-yong-pelicannginx-da-jian-jing-tai-blog.html</link><description>&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
+&lt;p&gt;安装完成之后，将移动硬盘连接到RaspberryPi。然后挂载移动硬盘，请注意在你的系统中，移动硬盘的并不一定是&lt;code&gt;/dev/sda1&lt;/code&gt;，请自行调整。&lt;code&gt;/mnt/usb&lt;/code&gt;是挂载到的路径，当然你也可以选择挂载到别的路径。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;ntfs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sda&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;安装 rtorrent&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;rtorrent&lt;/code&gt;是一款非常棒的BT下载软件，由于它是完全基于命令行的工具，所以非常适合RaspberryPi使用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;rtorrent&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在我们开始使用rtorrent之前，我们先要进行一些设置，请新建文件&lt;code&gt;~/.rtorrent.rc&lt;/code&gt;，并输入以下内容。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# 保存下载文件的目录，建议指向移动硬盘上的路径&lt;/span&gt;
+&lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;download&lt;/span&gt;
+
+&lt;span class="cp"&gt;# 保存当前rtorrent会话的文件夹&lt;/span&gt;
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rSession&lt;/span&gt;
+
+&lt;span class="cp"&gt;# 上传下载设置，请按需调整&lt;/span&gt;
+&lt;span class="n"&gt;upload_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+&lt;span class="n"&gt;download_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;
+&lt;span class="n"&gt;peer_exchange&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+
+&lt;span class="cp"&gt;# 打开DHT，方便连接更多peer &lt;/span&gt;
+&lt;span class="n"&gt;dht&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;auto&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;现在，我们终于可以开始使用rtorrent了，介绍一些简单的操作。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;在主窗口下按`&lt;/span&gt;&lt;span class="n"&gt;SPACE&lt;/span&gt;&lt;span class="err"&gt;`添加&lt;/span&gt;&lt;span class="n"&gt;BT&lt;/span&gt;&lt;span class="err"&gt;种子文件。&lt;/span&gt;
+
+&lt;span class="err"&gt;选中&lt;/span&gt;&lt;span class="n"&gt;BT&lt;/span&gt;&lt;span class="err"&gt;任务后按&lt;/span&gt; &lt;span class="n"&gt;Ctrl&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="err"&gt;开始下载&lt;/span&gt;
+
+&lt;span class="n"&gt;Ctrl&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="err"&gt;退出&lt;/span&gt;&lt;span class="n"&gt;rtorrent&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;关于rtorrent，这儿有一篇非常好的&lt;a href="http://mylinuxbook.com/rtorrent-bit-torrent-client/"&gt;tutorial&lt;/a&gt;，可以学习到更多技巧。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jiajun Fan</dc:creator><pubDate>Sat, 18 Oct 2014 11:00:00 +0200</pubDate><guid>tag:,2014-10-18:shi-yong-raspberrypi-da-jian-bt-he-zi.html</guid></item><item><title>使用 Pelican+Nginx 搭建静态 Blog</title><link>/shi-yong-pelicannginx-da-jian-jing-tai-blog.html</link><description>&lt;p&gt;对于个人网站来说，很多情况下一个简单易用的静态Blog就足够了。现在有很多工具可以帮助我们搭建这样的静态Blog，熟悉Ruby的同学可以使用&lt;a href="http://octoptress.org"&gt;Octopress&lt;/a&gt;或者&lt;a href="http://jekyllrb.com"&gt;Jekyll&lt;/a&gt;，喜欢Python的可以用&lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;，node.js下有&lt;a href="http://hexo.io"&gt;Hexo&lt;/a&gt;，&lt;a href="http://metalsmith.io"&gt;MetalSmith&lt;/a&gt;等等。本文以Pelican+Nginx为例，讲述如何建立一个静态Blog。&lt;/p&gt;
 &lt;h1&gt;安装Pelican&lt;/h1&gt;
 &lt;p&gt;Pelican是一个基于Python的静态网站生成工具，可以简单地使用&lt;code&gt;pip&lt;/code&gt;来安装。如果尚未安装Python或者pip，请自行google，安装Pelican时请视需要加上&lt;code&gt;sudo&lt;/code&gt;。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;
