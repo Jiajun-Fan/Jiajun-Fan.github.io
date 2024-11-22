@@ -1,4 +1,6 @@
-Jiajun-Fan.github.io
-====================
+# 项目简介
 
-Jiajun's blog
+## 项目背景
+
+`Verilog` simulator长期以来被用作验证
+
