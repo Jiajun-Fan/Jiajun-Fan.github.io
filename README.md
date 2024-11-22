@@ -1,6 +1,5 @@
 # 项目简介
 
-## 项目背景
+## Why another Verilog simulator
 
-`Verilog` simulator长期以来被用作验证
-
+Because commercial Verilog simulator like VCS / XCELIUM sucks, they are closed source, in-predictable and way out-of-date. The world deserve a bad simulator.
