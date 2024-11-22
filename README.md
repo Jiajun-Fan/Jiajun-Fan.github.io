@@ -2,4 +2,4 @@
 
 ## Why another Verilog simulator
 
-Because commercial Verilog simulator like VCS / XCELIUM sucks, they are closed source, in-predictable and way out-of-date. The world deserve a bad simulator.
+Because commercial Verilog simulators like VCS & XCELIUM suck, they are closed source, in-predictable and way out-of-date. The world deserves a better simulator.
